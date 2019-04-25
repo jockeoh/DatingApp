@@ -31,23 +31,17 @@ namespace DatingApp.API.Data
 
         public async Task<Photo> GetPhoto(int id)
         {
-            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
-
-            return photo;
+            return await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
-
-            return user;
+            return await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            var users = await _context.Users.Include(p => p.Photos).ToListAsync();
-
-            return users;
+            return await _context.Users.Include(p => p.Photos).ToListAsync();
         }
 
         public async Task<bool> SaveAll()
