@@ -12,9 +12,12 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./member-edit.component.css']
 })
 export class MemberEditComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute, private alertify: AlertifyService,
-              private userService: UserService, private authService: AuthService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private alertify: AlertifyService,
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
   @ViewChild('editForm') editForm: NgForm;
   user: User;
   photoUrl: string;
@@ -29,16 +32,21 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
-    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+    this.authService.currentPhotoUrl.subscribe(photoUrl => (this.photoUrl = photoUrl));
   }
 
   updateUser() {
-    this.userService.updateUser({ id: this.authService.decodedToken.nameid, user: this.user }).subscribe(next => {
-      this.alertify.success('Profile updated successfully');
-      this.editForm.reset(this.user);
-    }, error => {
-      this.alertify.error(error);
-    });
+    this.userService
+      .updateUser({ id: this.authService.decodedToken.nameid, user: this.user })
+      .subscribe(
+        next => {
+          this.alertify.success('Profile updated successfully');
+          this.editForm.reset(this.user);
+        },
+        error => {
+          this.alertify.error(error);
+        }
+      );
   }
 
   updateMainPhoto(photoUrl) {
