@@ -126,10 +126,6 @@ namespace DatingApp.API.Controllers
                 .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(p => p.Id == photoId);
 
-            // should never happend
-            if (photo.isMain)
-                return BadRequest("You cannot reject the main photo");
-
             if (photo.PublicId != null)
             {
                 var deleteParams = new DeletionParams(photo.PublicId);

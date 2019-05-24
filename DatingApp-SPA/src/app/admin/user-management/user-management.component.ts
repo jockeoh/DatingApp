@@ -63,8 +63,10 @@ export class UserManagementComponent implements OnInit {
       { name: 'VIP', value: 'VIP' }
     ];
 
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < availableRoles.length; i++) {
       let isMatch = false;
+      // tslint:disable-next-line: prefer-for-of
       for (let j = 0; j < userRoles.length; j++) {
         if (availableRoles[i].name === userRoles[j]) {
           isMatch = true;
